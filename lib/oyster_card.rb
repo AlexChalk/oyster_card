@@ -19,7 +19,7 @@ class OysterCard
 
   def touch_in
     raise "Error: Card already in journey" if in_journey?
-    raise "Error: Insufficient funds" if balance < 1
+    raise "Error: Insufficient funds" if insufficient_funds?(FARE)
     self.in_journey = true
   end
 
@@ -42,7 +42,7 @@ class OysterCard
   end
 
   def insufficient_funds?(fare)
-    balance - fare < 0
+    balance < fare
   end
 
 end
