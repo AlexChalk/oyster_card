@@ -20,8 +20,10 @@ describe OysterCard do
     end
 
     it 'raises error if top-up would take balance over 90' do
-      expect { oyster_card.top_up(100) }.to raise_error {"Error: Balance cannot exceed $#{OysterCard::BALANCE_LIMIT}" }
-    end 
+      balance_limit = OysterCard::BALANCE_LIMIT
+      oyster_card.top_up(balance_limit)
+      expect { oyster_card.top_up(1) }.to raise_error {"Error: Balance cannot exceed $#{OysterCard::BALANCE_LIMIT}" }
+    end
   end
 
 end
