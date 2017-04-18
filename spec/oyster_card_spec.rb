@@ -22,7 +22,7 @@ describe OysterCard do
     it 'raises error if top-up would take balance over 90' do
       balance_limit = OysterCard::BALANCE_LIMIT
       oyster_card.top_up(balance_limit)
-      expect { oyster_card.top_up(1) }.to raise_error {"Error: Balance cannot exceed $#{OysterCard::BALANCE_LIMIT}" }
+      expect { oyster_card.top_up(1) }.to raise_error "Error: Balance cannot exceed $#{OysterCard::BALANCE_LIMIT}" 
     end
   end
 
@@ -34,14 +34,20 @@ describe OysterCard do
 
     it 'raises error if deduction takes balance under 0' do
       oyster_card.top_up(5)
-      expect { oyster_card.deduct(10) }.to raise_error {"Error: Insufficient funds"}
+      expect { oyster_card.deduct(10) }.to raise_error "Error: Insufficient funds"
     end
   end
 
   describe '#touch_in' do
     it 'raises error if card in journey' do
       oyster_card.touch_in
-      expect { oyster_card.touch_in }.to raise_error {"Error: Card already in journey"}
+      expect { oyster_card.touch_in }.to raise_error "Error: Card already in journey"
+    end
+  end
+
+  describe '#touch_out' do
+    it 'raises error if card not in journey' do
+      expect { oyster_card.touch_out }.to raise_error "Error: Card not in journey"
     end
   end
 
