@@ -28,12 +28,13 @@ describe OysterCard do
 
   describe '#deduct' do
     it 'reduces the balance by the specified amount' do
+      oyster_card.top_up(5)
       expect { oyster_card.deduct(5) }.to change { oyster_card.balance }.by -5
     end
 
     it 'raises error if deduction takes balance under 0' do
       oyster_card.top_up(5)
-      expect { oyster_card.deduct(10) }.to raise_error {"Error: Insufficent funds"}
+      expect { oyster_card.deduct(10) }.to raise_error {"Error: Insufficient funds"}
     end
   end
 

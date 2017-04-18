@@ -12,6 +12,7 @@ class OysterCard
   end
 
   def deduct(amount)
+    raise "Error: Insufficient funds" if insufficient_funds?(amount)
     self.balance -= amount
   end
 
@@ -21,6 +22,10 @@ class OysterCard
 
   def exceeds_limit?(top_up)
     top_up + balance > BALANCE_LIMIT
+  end
+
+  def insufficient_funds?(fare)
+    balance - fare < 0
   end
 
 end
