@@ -20,6 +20,10 @@ class OysterCard
     in_journey
   end
 
+  def touch_in
+    self.in_journey = true
+  end
+
   private
 
   attr_writer :balance, :in_journey
