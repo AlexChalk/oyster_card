@@ -5,7 +5,7 @@ describe OysterCard do
   alias_method :oyster_card, :subject
 
   it { is_expected.to respond_to(:in_journey?) }
-  
+
   it 'has a BALANCE_LIMIT' do
     expect(OysterCard::BALANCE_LIMIT).to be_an_instance_of(Integer)
   end
@@ -44,6 +44,11 @@ describe OysterCard do
     it 'reports card as in_journey' do
       oyster_card.touch_in
       expect(oyster_card.in_journey?).to eq true
+    end
+
+    it 'raises error if card in journey' do
+      oyster_card.touch_in
+      expect { oyster_card.touch_in }.to raise_error 'Error: card already in journey'
     end
   end
 
