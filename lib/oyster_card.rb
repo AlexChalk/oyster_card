@@ -23,16 +23,17 @@ class OysterCard
 
   def touch_out
     raise "Error: Card not in journey" unless in_journey?
+    self.in_journey = false
+  end
+
+  def in_journey?
+    in_journey
   end
 
   private
 
   attr_writer :balance
   attr_accessor :in_journey
-
-  def in_journey?
-    in_journey
-  end
 
   def exceeds_limit?(top_up)
     top_up + balance > BALANCE_LIMIT
