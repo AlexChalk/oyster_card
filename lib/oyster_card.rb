@@ -12,14 +12,9 @@ class OysterCard
     self.balance += amount
   end
 
-  def deduct(amount)
-    raise "Error: Insufficient funds" if insufficient_funds?(amount)
-    self.balance -= amount
-  end
-
   def touch_in
     raise "Error: Card already in journey" if in_journey?
-    raise "Error: Insufficient funds" if insufficient_funds?(FARE)
+    raise "Error: Insufficient funds" if insufficient_funds?
     self.in_journey = true
   end
 
@@ -38,11 +33,15 @@ class OysterCard
   attr_writer :balance
   attr_accessor :in_journey
 
+  def deduct(amount = FARE)
+    self.balance -= amount
+  end
+
   def exceeds_limit?(top_up)
     top_up + balance > BALANCE_LIMIT
   end
 
-  def insufficient_funds?(fare)
+  def insufficient_funds?(fare = FARE)
     balance < fare
   end
 

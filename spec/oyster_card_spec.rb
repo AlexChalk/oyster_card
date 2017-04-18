@@ -25,21 +25,9 @@ describe OysterCard do
       expect { oyster_card.top_up(5) }.to change { oyster_card.balance }.by 5
     end
 
-    it 'raises error if top-up would take balance over 90' do
+    it 'raises error if top-up would take balance over BALANCE_LIMIT' do
       oyster_card.top_up(balance_limit)
       expect { oyster_card.top_up(1) }.to raise_error "Error: Balance cannot exceed $#{balance_limit}"
-    end
-  end
-
-  describe '#deduct' do
-    it 'reduces the balance by the specified amount' do
-      oyster_card.top_up(5)
-      expect { oyster_card.deduct(5) }.to change { oyster_card.balance }.by -5
-    end
-
-    it 'raises error if deduction takes balance under 0' do
-      oyster_card.top_up(5)
-      expect { oyster_card.deduct(10) }.to raise_error "Error: Insufficient funds"
     end
   end
 
@@ -86,7 +74,7 @@ describe OysterCard do
   context 'card is not sufficiently topped up' do
 
     describe '#touch_in' do
-      it 'raises balance is less than FARE' do
+      it 'raises error if balance is less than FARE' do
         oyster_card.top_up(fare - 1)
         expect{ oyster_card.touch_in }.to raise_error "Error: Insufficient funds"
       end
