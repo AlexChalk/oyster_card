@@ -4,8 +4,8 @@ describe OysterCard do
   subject { OysterCard.new }
   alias_method :oyster_card, :subject
 
-  describe '#initialize' do
-    it 'initializes with a balance of 0' do
+  describe '#balance' do
+    it 'is set to 0 at initialization' do
       expect(oyster_card.balance).to eq 0
     end
   end
