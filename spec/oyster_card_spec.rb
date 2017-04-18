@@ -12,8 +12,12 @@ describe OysterCard do
 
   describe '#top_up' do
     it 'increases the balance by the specified amount' do
-      expect { oyster_card.top_up(5) }.to change { subject.balance }.by 5
+      expect { oyster_card.top_up(5) }.to change { oyster_card.balance }.by 5
     end
+
+    it 'raises error if top-up would take balance over 90' do
+      expect { oyster_card.top_up(100) }.to raise_error {"Error: Balance cannot exceed $90" }
+    end 
   end
 
 end
