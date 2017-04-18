@@ -1,6 +1,6 @@
 class OysterCard
   BALANCE_LIMIT = 90
-  attr_reader :balance, :in_journey
+  attr_reader :balance
 
   def initialize
     @balance = 0
@@ -16,17 +16,19 @@ class OysterCard
     self.balance -= amount
   end
 
-  def in_journey?
-    in_journey
-  end
-
   def touch_in
+    raise "Error: Card already in journey" if in_journey?
     self.in_journey = true
   end
 
   private
 
-  attr_writer :balance, :in_journey
+  attr_writer :balance
+  attr_accessor :in_journey
+
+  def in_journey?
+    in_journey
+  end
 
   def exceeds_limit?(top_up)
     top_up + balance > BALANCE_LIMIT
