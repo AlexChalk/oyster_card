@@ -4,6 +4,8 @@ describe OysterCard do
   subject { OysterCard.new }
   alias_method :oyster_card, :subject
 
+  it { is_expected.to respond_to(:in_journey?) }
+  
   it 'has a BALANCE_LIMIT' do
     expect(OysterCard::BALANCE_LIMIT).to be_an_instance_of(Integer)
   end
@@ -35,6 +37,13 @@ describe OysterCard do
     it 'raises error if deduction takes balance under 0' do
       oyster_card.top_up(5)
       expect { oyster_card.deduct(10) }.to raise_error {"Error: Insufficient funds"}
+    end
+  end
+
+  describe '#touch_in' do
+    it 'reports card as in_journey' do
+      oyster_card.touch_in
+      expect(oyster_card.in_journey?).to eq true
     end
   end
 
