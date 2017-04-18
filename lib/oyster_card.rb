@@ -1,5 +1,6 @@
 class OysterCard
   BALANCE_LIMIT = 90
+  FARE = 2
   attr_reader :balance
 
   def initialize
@@ -18,6 +19,7 @@ class OysterCard
 
   def touch_in
     raise "Error: Card already in journey" if in_journey?
+    raise "Error: Insufficient funds" if balance < 1
     self.in_journey = true
   end
 

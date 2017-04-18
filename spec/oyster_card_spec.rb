@@ -8,6 +8,10 @@ describe OysterCard do
     expect(OysterCard::BALANCE_LIMIT).to be_an_instance_of(Integer)
   end
 
+  it 'has a FARE' do
+    expect(OysterCard::FARE).to be_an_instance_of(Integer)
+  end
+
   describe '#balance' do
     it 'is set to 0 at initialization' do
       expect(oyster_card.balance).to eq 0
@@ -73,11 +77,16 @@ describe OysterCard do
 
   end
 
-  context 'card is not topped up' do
+  context 'card is not sufficiently topped up' do
 
     describe '#touch_in' do
-      it 'raises error' do
+      it 'raises error if balance is 0' do
         expect { oyster_card.touch_in }.to raise_error "Error: Insufficient funds"
+      end
+
+      it 'raises balance is less than FARE' do
+        oyster_card.top_up(OysterCard::FARE - 1)
+        expect{ oyster_card.touch_in }.to raise_error "Error: Insufficient funds"
       end
     end
   end
