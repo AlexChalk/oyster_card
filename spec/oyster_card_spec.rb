@@ -38,7 +38,7 @@ describe OysterCard do
     end
   end
 
-  context 'card needs to be topped up to perform following methods' do
+  context 'card is topped up' do
     before { oyster_card.top_up(OysterCard::BALANCE_LIMIT) }
 
     describe '#touch_in' do
@@ -71,6 +71,15 @@ describe OysterCard do
       end
     end
 
+  end
+
+  context 'card is not topped up' do
+
+    describe '#touch_in' do
+      it 'raises error' do
+        expect { oyster_card.touch_in }.to raise_error "Error: Insufficient funds"
+      end
+    end
   end
 
 end
