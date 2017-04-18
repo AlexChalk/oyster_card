@@ -1,4 +1,5 @@
 class OysterCard
+  BALANCE_LIMIT = 90
   attr_reader :balance
 
   def initialize
@@ -6,14 +7,13 @@ class OysterCard
   end
 
   def top_up(amount)
-    raise 'Error: Balance cannot exceed $90' if exceeds_limit?(amount)
+    raise "Error: Balance cannot exceed $#{BALANCE_LIMIT}" if exceeds_limit?(amount)
     self.balance += amount
   end
 
   private
 
   attr_writer :balance
-  BALANCE_LIMIT = 90
 
   def exceeds_limit?(top_up)
     top_up + balance > BALANCE_LIMIT
