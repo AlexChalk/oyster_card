@@ -25,6 +25,7 @@ class OysterCard
 
   def touch_out
     raise "Error: Card not in journey" unless in_journey?
+    deduct(FARE)
     self.in_journey = false
   end
 

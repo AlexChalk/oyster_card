@@ -59,8 +59,8 @@ describe OysterCard do
       end
 
       it 'deducts fare from card' do
-        expect(oyster_card).to receive(:deduct)
-        oyster_card.touch_out
+        oyster_card.touch_in
+        expect{ oyster_card.touch_out }.to change{ oyster_card.balance }.by (-fare)
       end
     end
 
