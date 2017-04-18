@@ -3,13 +3,15 @@ require 'oyster_card'
 describe OysterCard do
   subject { OysterCard.new }
   alias_method :oyster_card, :subject
+  let(:fare) { OysterCard::FARE }
+  let(:balance_limit ) { OysterCard::BALANCE_LIMIT }
 
   it 'has a BALANCE_LIMIT' do
-    expect(OysterCard::BALANCE_LIMIT).to be_an_instance_of(Integer)
+    expect(balance_limit).to be_an_instance_of(Integer)
   end
 
   it 'has a FARE' do
-    expect(OysterCard::FARE).to be_an_instance_of(Integer)
+    expect(fare).to be_an_instance_of(Integer)
   end
 
   describe '#balance' do
@@ -24,9 +26,8 @@ describe OysterCard do
     end
 
     it 'raises error if top-up would take balance over 90' do
-      balance_limit = OysterCard::BALANCE_LIMIT
       oyster_card.top_up(balance_limit)
-      expect { oyster_card.top_up(1) }.to raise_error "Error: Balance cannot exceed $#{OysterCard::BALANCE_LIMIT}"
+      expect { oyster_card.top_up(1) }.to raise_error "Error: Balance cannot exceed $#{balance_limit}"
     end
   end
 
@@ -43,7 +44,7 @@ describe OysterCard do
   end
 
   context 'card is topped up' do
-    before { oyster_card.top_up(OysterCard::BALANCE_LIMIT) }
+    before { oyster_card.top_up(balance_limit) }
 
     describe '#touch_in' do
       it 'raises error if card in journey' do
@@ -55,6 +56,11 @@ describe OysterCard do
     describe '#touch_out' do
       it 'raises error if card not in journey' do
         expect { oyster_card.touch_out }.to raise_error "Error: Card not in journey"
+      end
+
+      it 'deducts fare from card' do
+        expect(oyster_card).to receive(:deduct)
+        oyster_card.touch_out
       end
     end
 
@@ -81,7 +87,7 @@ describe OysterCard do
 
     describe '#touch_in' do
       it 'raises balance is less than FARE' do
-        oyster_card.top_up(OysterCard::FARE - 1)
+        oyster_card.top_up(fare - 1)
         expect{ oyster_card.touch_in }.to raise_error "Error: Insufficient funds"
       end
     end
