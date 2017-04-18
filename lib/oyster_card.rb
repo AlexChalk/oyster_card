@@ -21,6 +21,10 @@ class OysterCard
     self.in_journey = true
   end
 
+  def touch_out
+    raise "Error: Card not in journey" unless in_journey?
+  end
+
   private
 
   attr_writer :balance
