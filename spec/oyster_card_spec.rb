@@ -80,10 +80,6 @@ describe OysterCard do
   context 'card is not sufficiently topped up' do
 
     describe '#touch_in' do
-      it 'raises error if balance is 0' do
-        expect { oyster_card.touch_in }.to raise_error "Error: Insufficient funds"
-      end
-
       it 'raises balance is less than FARE' do
         oyster_card.top_up(OysterCard::FARE - 1)
         expect{ oyster_card.touch_in }.to raise_error "Error: Insufficient funds"
