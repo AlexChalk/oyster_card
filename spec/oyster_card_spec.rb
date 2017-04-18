@@ -43,25 +43,27 @@ describe OysterCard do
       oyster_card.touch_in
       expect { oyster_card.touch_in }.to raise_error "Error: Card already in journey"
     end
-
-    it 'doesn\'t raise error if card not in journey' do
-      expect { oyster_card.touch_in }.to_not raise_error
-    end
   end
 
   describe '#touch_out' do
     it 'raises error if card not in journey' do
       expect { oyster_card.touch_out }.to raise_error "Error: Card not in journey"
     end
-
-    it 'doesn\'t raise error if card in journey' do
-      oyster_card.touch_in
-      expect { oyster_card.touch_out }.to_not raise_error
-    end
   end
 
   describe '#in_journey?' do
-    it 'returns false when card has just been initialized' do
+    it 'is not truthy when card has just been initialized' do
+      expect(oyster_card).to_not be_in_journey
+    end
+
+    it 'is truthy when card has been touched in' do
+      oyster_card.touch_in
+      expect(oyster_card).to be_in_journey
+    end
+
+    it 'is falsey when card has been touched out' do
+      oyster_card.touch_in
+      oyster_card.touch_out
       expect(oyster_card).to_not be_in_journey
     end
   end
