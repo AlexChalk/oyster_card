@@ -4,6 +4,6 @@ describe OysterCard do
   subject { OysterCard.new }
   alias_method :oyster_card, :subject
 
-  it { is_expected.to respond_to :check_balance }
+  it { is_expected.to respond_to :balance }
 
 end

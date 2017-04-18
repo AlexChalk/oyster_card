@@ -1,4 +1,3 @@
 class OysterCard
-  def check_balance
-  end
+  attr_reader :balance
 end
