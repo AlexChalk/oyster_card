@@ -4,6 +4,10 @@ describe OysterCard do
   subject { OysterCard.new }
   alias_method :oyster_card, :subject
 
+  it 'has a BALANCE_LIMIT' do
+    expect(OysterCard::BALANCE_LIMIT).to be_an_instance_of(Integer)
+  end
+
   describe '#balance' do
     it 'is set to 0 at initialization' do
       expect(oyster_card.balance).to eq 0

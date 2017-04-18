@@ -13,9 +13,10 @@ class OysterCard
   private
 
   attr_writer :balance
+  BALANCE_LIMIT = 90
 
   def exceeds_limit?(top_up)
-    top_up + balance > 90
+    top_up + balance > BALANCE_LIMIT
   end
 
 end
