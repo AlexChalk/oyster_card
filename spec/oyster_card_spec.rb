@@ -4,6 +4,8 @@ describe OysterCard do
   subject { OysterCard.new }
   alias_method :oyster_card, :subject
 
+  it { is_expected.to respond_to(:deduct) }
+
   it 'has a BALANCE_LIMIT' do
     expect(OysterCard::BALANCE_LIMIT).to be_an_instance_of(Integer)
   end
@@ -23,6 +25,12 @@ describe OysterCard do
       balance_limit = OysterCard::BALANCE_LIMIT
       oyster_card.top_up(balance_limit)
       expect { oyster_card.top_up(1) }.to raise_error {"Error: Balance cannot exceed $#{OysterCard::BALANCE_LIMIT}" }
+    end
+  end
+
+  describe '#deduct' do
+    it 'reduces the balance by the specified amount' do
+      expect { oyster_card.deduct(5) }.to change { oyster_card.balance }.by -5
     end
   end
 
