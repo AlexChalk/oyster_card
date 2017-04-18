@@ -1,7 +1,9 @@
 require 'oyster_card'
 
 describe OysterCard do
-  it 'responds to check_balance' do
-    expect(subject).to respond_to :check_balance
-  end
+  subject { OysterCard.new }
+  alias_method :oyster_card, :subject
+
+  it { is_expected.to respond_to :check_balance }
+
 end
