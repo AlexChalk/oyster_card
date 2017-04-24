@@ -1,6 +1,6 @@
 # Oystercard
 
-This project maps a simple travelcard scheme, such as the Oyster Card scheme in London. It is very basic code that took a day to complete.
+This project maps a simple travelcard scheme, such as the Oyster Card scheme in London. 
 
 ## Dependencies
 
@@ -41,4 +41,4 @@ To test, navigate to the project root and run `rspec`.
 
 ## Other notes
 
-Part of week two at the [Makers Academy](http://www.makersacademy.com) Bootcamp.
+This is a day's work from week two of the [Makers Academy](http://www.makersacademy.com) Bootcamp.
