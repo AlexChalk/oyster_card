@@ -10,7 +10,7 @@ You will also need `bundler`—if you haven't installed it, run `gem install bun
 
 ## Usage
 
-Run this project in a REPL such as IRB (installed with Ruby), or Pry (`gem install pry`). Run `irb` or `pry` from the project root, followed by `require './lib/docking_station.rb'`. Here is an example of the application in use:
+Run this project in a REPL such as IRB (installed with Ruby), or Pry (`gem install pry`). Run `irb` or `pry` from the project root, followed by `require './lib/oyster_card.rb'`. Here is an example of the application in use:
 
 ```
 [6] pry(main)> card.top_up(20)
