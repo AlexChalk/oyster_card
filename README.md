@@ -39,6 +39,13 @@ An error is raised if you touch in/out an already touched-in/out card, or if you
 
 To test, navigate to the project root and run `rspec`.
 
+## Other Implementaions
+
+At Makers Academy, we switch pair partners each day and work on whoever's version of the project is least advanced. I worked on three other versions of this week's project:
+
+1. [Wednesday](https://github.com/chrisjmit/oystercard/commits/master) and [Friday](https://github.com/Robert-G-J/oyster_challenge): Implement station objects with names and zones; cards touch in/out at stations and keep track of their journey history.
+2. [Thursday](https://github.com/sophieklm/oystercard): All of the above, plus cards deduct a penalty fare if you forget to touch in/out.
+
 ## Other notes
 
 This is a day's work from week two of the [Makers Academy](http://www.makersacademy.com) Bootcamp.
